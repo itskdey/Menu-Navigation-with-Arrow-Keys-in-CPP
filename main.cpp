@@ -1,18 +1,42 @@
-#include <iostream> // header file for input and output operations in C++
-#include <conio.h> // header file that provides access to several functions through the console
-#include <windows.h> // header file that defines the Windows API
-#include "Headers/antheaderplusplus.h" // custom header file
+#include <iostream>
+#include <conio.h>
+#include <windows.h>
 
-using namespace std; // allows referring to elements in the standard namespace
+using namespace std;
+
+void foreColor(int color) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, color);
+}
+
+void gotoxy(int x, int y) {
+    COORD coordinates;
+    coordinates.X = x;
+    coordinates.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coordinates);
+}
+
+void cls() {
+    COORD topLeft = {0, 0};
+    HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO screen;
+    DWORD written;
+
+    GetConsoleScreenBufferInfo(console, &screen);
+    FillConsoleOutputCharacterA(console, ' ', screen.dwSize.X * screen.dwSize.Y, topLeft, &written);
+    FillConsoleOutputAttribute(console, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE,
+        screen.dwSize.X * screen.dwSize.Y, topLeft, &written);
+    SetConsoleCursorPosition(console, topLeft);
+}
 
 int main() {
     again:
     int option;
     static int j = 0;
-    system("cls"); // clear the console screen
+    system("cls");
 
     do {
-        foreColor(14); // set the text color to yellow
+        foreColor(14);
         gotoxy(17, 7);
         cout << "-- MENU --" << endl;
         gotoxy(9, 9);
@@ -26,27 +50,27 @@ int main() {
         cout << "USE UP AND DOWN ARROW KEYS...";
 
         if (j == 0) {
-            foreColor(5); // set the text color to purple
+            foreColor(5);
             gotoxy(9, 9);
             cout << "1 - OPTION 1" << endl;
         }
         if (j == 1) {
-            foreColor(5); // set the text color to purple
+            foreColor(5);
             gotoxy(9, 11);
             cout << "2 - OPTION 2" << endl;
         }
         if (j == 2) {
-            foreColor(5); // set the text color to purple
+            foreColor(5);
             gotoxy(9, 13);
             cout << "3 - OPTION 3" << endl;
         }
 
-        option = getch(); // get the key pressed by the user
+        option = getch();
         switch (option) {
-            case 80: j++; if (j > 2) j = 0; break; // down arrow key pressed, increment j and wrap around if necessary
-            case 72: j--; if (j < 0) j = 2; break; // up arrow key pressed, decrement j and wrap around if necessary
+            case 80: j++; if (j > 2) j = 0; break;
+            case 72: j--; if (j < 0) j = 2; break;
         }
-    } while (option != 13); // repeat until the user presses the Enter key
+    } while (option != 13);
 
     switch (j) {
         case 0:
@@ -66,4 +90,5 @@ int main() {
             break;
     }
 
+    return 0;
 }
