@@ -1,5 +1,5 @@
 <h2 align="center">Visitors Counts👀</h2>
-<a href="https://github.com/itskdey/Menu-Navigation-with-Arrow-Keys-in-CPP"><img alt="Cute Count" src="https://moe-counter.glitch.me/get/@itskdey" /></a>
+<a href="https://github.com/itskdey/Menu-Navigation-with-Arrow-Keys-in-CPP"><img alt="Cute Count" src="https://moe-counter.glitch.me/get/@itskdey?theme=rule34" /></a>
 
 # Menu Navigation with Arrow Keys in C++
 
